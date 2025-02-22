@@ -1,7 +1,7 @@
 package Game;
 import java.util.*;
 
-public class BoardConfig {
+public class GameConfig {
     // Atribut
     int boardHeight; // N
     int boardWidth; // M
@@ -11,7 +11,7 @@ public class BoardConfig {
     char[][] board;
 
     // Konstruktor konfigurasi papan
-    public BoardConfig(int N, int M, int P, List<Piece> piecesList, String S) {
+    public GameConfig(int N, int M, int P, List<Piece> piecesList, String S) {
         this.boardHeight = N;
         this.boardWidth = M;
         this.numPieces = P;
@@ -28,7 +28,7 @@ public class BoardConfig {
     }
 
     // Prosedur konstruktor
-    public void setBoardCongig(int N, int M, int P, List<Piece> piecesList, String S) {
+    public void setGameCongig(int N, int M, int P, List<Piece> piecesList, String S) {
         this.boardHeight = N;
         this.boardWidth = M;
         this.numPieces = P;
@@ -49,7 +49,7 @@ public class BoardConfig {
         return this.board[i][j] == '.';
     }
 
-    // Fungsi-fungsi untuk mengambil atribut objek papan
+    // Method untuk mengambil atribut objek papan
     public int getBoardHeight() {
         return this.boardHeight;
     }

@@ -22,7 +22,7 @@ public class IOHandler {
     }
 
     // Baca input file
-    public static void readInput(File filePath, BoardConfig boardConfig) {
+    public static void readInput(File filePath, GameConfig gameConfig) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath));) {
             String line;
 
@@ -63,7 +63,7 @@ public class IOHandler {
                 pieces.add(new Piece(pieceCells, pieceChar)); // Memasukkan list ke dalam objek Piece
             }
             // Konstruksi objek konfigurasi papan
-            boardConfig.setBoardCongig(N, M, P, pieces, S);
+            gameConfig.setGameCongig(N, M, P, pieces, S);
             reader.close();
 
         } catch (IOException e) {
