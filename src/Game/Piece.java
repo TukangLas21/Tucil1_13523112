@@ -83,42 +83,33 @@ public class Piece {
     }
 
     // Method untuk mendapatkan koordinat maksimum dan minimum piece
-    public int getMaxRow() {
-        int maxRow = Integer.MIN_VALUE;
+    public int getMaxX() {
+        int maxX = Integer.MIN_VALUE;
         for (int[] coordinate : cells) {
-            maxRow = Math.max(maxRow, coordinate[0]);
+            maxX = Math.max(maxX, coordinate[0]);
         }
-        return maxRow;
+        return maxX;
     }
-    public int getMinRow() {
-        int minRow = Integer.MAX_VALUE;
+    public int getMinX() {
+        int minX = Integer.MAX_VALUE;
         for (int[] coordinate : cells) {
-            minRow = Math.min(minRow, coordinate[0]);
+            minX = Math.min(minX, coordinate[0]);
         }
-        return minRow;
+        return minX;
     }
-    public int getMaxCol() {
-        int maxCol = Integer.MIN_VALUE;
+    public int getMaxY() {
+        int maxY = Integer.MIN_VALUE;
         for (int[] coordinate : cells) {
-            maxCol = Math.max(maxCol, coordinate[1]);
+            maxY = Math.max(maxY, coordinate[1]);
         }
-        return maxCol;
+        return maxY;
     }
-    public int getMinCol() {
-        int minCol = Integer.MAX_VALUE;
+    public int getMinY() {
+        int minY = Integer.MAX_VALUE;
         for (int[] coordinate : cells) {
-            minCol = Math.min(minCol, coordinate[1]);
+            minY = Math.min(minY, coordinate[1]);
         }
-        return minCol;
-    }
-
-    // Method untuk sort koordinat piece berdasarkan baris atau kolomnya
-    public void sortPieceByX() {
-        Collections.sort(cells, (a,b) -> Integer.compare(a[0], b[0]));
-    }
-
-    public void sortPieceByY() {
-        Collections.sort(cells, (a,b) -> Integer.compare(a[1], b[1]));
+        return minY;
     }
 
     // Method untuk menambahkan koordinat piece sebesar offset tertentu

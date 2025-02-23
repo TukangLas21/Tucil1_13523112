@@ -1,4 +1,5 @@
 package Game;
+import Utils.Utils;
 import java.io.*;
 import java.util.*;
 
@@ -71,15 +72,61 @@ public class IOHandler {
         }   
     }
 
-    // Output ke dalam file
-    public static void writeOutput(File filePath, int execTime, int numCases, char[][] board) {
+    // Output hasil ke dalam file
+    public static void writeOutputFile(File filePath, char[][] board, int runTime, int numCases, boolean statusSolved) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));) {
+            if (statusSolved) {
+                for (int idxRow = 0; idxRow < board.length; idxRow++) {
+                    for (int idxCol = 0; idxCol < board[0].length; idxCol++) {
+                        char letter = board[idxRow][idxCol];
+                        String letterColor = Utils.letterColorMap.get(letter);
+                        // Validasi warna pada map
+                        if (letterColor != null) {
+                            writer.write(letterColor + letter);
+                        } else writer.write("\033[0m" + letter); // Jika for some reason tidak valid, di write dengan warna default
+                    }
+                    writer.newLine();
+                }
+            } else writer.write("Tidak ada solusi yang memenuhi.");
 
+            writer.newLine();
 
+            writer.write("Waktu pencarian: " + runTime + " ms");
 
+            writer.newLine();
+
+            writer.write("Banyak kasus yang ditinjau: " + numCases + " kasus");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    // Output hasil ke dalam terminal
+    public static void writeOutputTerminal(GameConfig gameConfig, int runTime, int numCases) {
+        char[][] board = gameConfig.getBoard();
+        boolean statusSolved = gameConfig.getStatus();
+
+        if (statusSolved) {
+            for (int idxRow = 0; idxRow < board.length; idxRow++) {
+                for (int idxCol = 0; idxCol < board[0].length; idxCol++) {
+                    char letter = board[idxRow][idxCol];
+                    String letterColor = Utils.letterColorMap.get(letter);
+                        // Validasi warna pada map
+                        if (letterColor != null) {
+                            System.out.print(letterColor + letter);
+                        } else System.out.print("\033[0m" + letter); // Jika for some reason tidak valid, di write dengan warna default
+                }
+                System.out.println();
+            }
+        } else {
+            System.out.println("Tidak ada solusi yang memenuhi.");
+        }
+
+        System.out.println("Waktu pencarian: " + runTime + " ms");
+
+        System.out.println("Banyak kasus yang ditinjau: " + numCases + " kasus");
+    }
+
+    // Fungsi untuk mendapatkan validasi untuk menyimpan output ke dalam file
+    
 }

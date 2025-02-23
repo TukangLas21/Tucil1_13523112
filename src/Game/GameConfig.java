@@ -9,6 +9,7 @@ public class GameConfig {
     String puzzleType; // S
     List<Piece> pieces;
     char[][] board;
+    boolean isSolved;
 
     // Konstruktor konfigurasi papan
     public GameConfig(int N, int M, int P, List<Piece> piecesList, String S) {
@@ -18,6 +19,7 @@ public class GameConfig {
         this.puzzleType = S;
         this.pieces = piecesList;
         this.board = new char[N][M];
+        this.isSolved = false;
 
         // Inisialisasi papan
         for (int i = 0; i < N; i++) {
@@ -35,6 +37,7 @@ public class GameConfig {
         this.puzzleType = S;
         this.pieces = piecesList;
         this.board = new char[N][M];
+        this.isSolved = false;
 
         // Inisialisasi papan
         for (int i = 0; i < N; i++) {
@@ -68,4 +71,10 @@ public class GameConfig {
     public char[][] getBoard() {
         return this.board;
     }
+    public boolean getStatus() {
+        return this.isSolved;
+    }
+
+    // Method untuk menyimpan nilai atribut baru
+    
 }
