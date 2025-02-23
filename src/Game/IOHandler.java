@@ -49,7 +49,7 @@ public class IOHandler {
                 while (tempChar == pieceChar) {
                     String[] pieceInfo = line.split(" ");
                     for (int idxCol = 0; idxCol < pieceInfo.length; idxCol++) {
-                        if (pieceInfo[idxCol].equals("")) continue;
+                        if (pieceInfo[idxCol].equals("")); // Skip (do nothing)
                         else {
                             int[] pieceCell = new int[]{idxRow, idxCol};
                             pieceCells.add(pieceCell);
@@ -70,4 +70,16 @@ public class IOHandler {
             e.printStackTrace();
         }   
     }
+
+    // Output ke dalam file
+    public static void writeOutput(File filePath, int execTime, int numCases, char[][] board) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));) {
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
