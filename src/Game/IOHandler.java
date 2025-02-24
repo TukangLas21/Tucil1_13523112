@@ -2,21 +2,41 @@ package Game;
 import Utils.Utils;
 import java.io.*;
 import java.util.*;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
+import java.awt.Color;
 
 public class IOHandler {
-    
+
+    private static Scanner scanner = new Scanner(System.in);
+
     // Input file handler
     public static File inputFile() {
+        
+        System.out.print("Masukkan nama file input: "); // Input cukup nama saja (tidak perlu path)
+        String fileName = scanner.nextLine(); 
+
+        File filePath = new File("../test/" + fileName); 
+
+        if (!filePath.exists()) { // Validasi file
+            System.out.println("File tidak ditemukan.");
+            return null;
+        }
+
+        // Debug input
+        // System.out.println("Sukses!");
+
+        return filePath;
+    }
+
+    // Baca dan simpan output path file
+    public static File outputFile() {
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.print("Masukkan nama file input: "); // Input cukup nama saja (tidak perlu path)
+            System.out.print("Masukkan nama file output: "); // Input cukup nama saja (tidak perlu path)
             String fileName = scanner.nextLine(); 
 
-            File filePath = new File("test/" + fileName); 
-
-            if (!filePath.exists()) { // Validasi file
-                System.out.println("File tidak ditemukan.");
-                return null;
-            }
+            File filePath = new File("../test/" + fileName); 
 
             return filePath;
         }
@@ -37,10 +57,13 @@ public class IOHandler {
             line = reader.readLine();
             String S = line.trim();
 
+            line = reader.readLine();
+
             // Baca pieces
             List<Piece> pieces = new ArrayList<>();
             for (int i = 0; i < P; i++) {
-                line = reader.readLine();
+                if (line == null) break; 
+
                 String lineChar = line.trim();
                 char pieceChar = lineChar.charAt(0);
                 char tempChar = pieceChar;
@@ -48,20 +71,22 @@ public class IOHandler {
                 int idxRow = 0;
 
                 while (tempChar == pieceChar) {
-                    String[] pieceInfo = line.split(" ");
+                    String[] pieceInfo = line.split("");
                     for (int idxCol = 0; idxCol < pieceInfo.length; idxCol++) {
-                        if (pieceInfo[idxCol].equals("")); // Skip (do nothing)
+                        if (pieceInfo[idxCol].equals("")) continue; // Skip (do nothing)
                         else {
-                            int[] pieceCell = new int[]{idxRow, idxCol};
+                            int[] pieceCell = new int[]{idxCol, idxRow};
                             pieceCells.add(pieceCell);
                         }
                     }
                     idxRow++;
                     line = reader.readLine();
+                    if (line == null) break;
                     String tempLineChar = line.trim();
                     tempChar = tempLineChar.charAt(0);
                 }
                 pieces.add(new Piece(pieceCells, pieceChar)); // Memasukkan list ke dalam objek Piece
+                if (line == null) break;
             }
             // Konstruksi objek konfigurasi papan
             gameConfig.setGameCongig(N, M, P, pieces, S);
@@ -73,17 +98,18 @@ public class IOHandler {
     }
 
     // Output hasil ke dalam file
-    public static void writeOutputFile(File filePath, char[][] board, int runTime, int numCases, boolean statusSolved) {
+    public static void writeOutputFile(String fileName, GameConfig gameConfig, long runTime, int numCases) {
+        char[][] board = gameConfig.getBoard();
+        boolean statusSolved = gameConfig.getStatus();
+
+        File filePath = new File("../test/results/", fileName + ".txt");
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));) {
             if (statusSolved) {
                 for (int idxRow = 0; idxRow < board.length; idxRow++) {
                     for (int idxCol = 0; idxCol < board[0].length; idxCol++) {
                         char letter = board[idxRow][idxCol];
-                        String letterColor = Utils.letterColorMap.get(letter);
-                        // Validasi warna pada map
-                        if (letterColor != null) {
-                            writer.write(letterColor + letter);
-                        } else writer.write("\033[0m" + letter); // Jika for some reason tidak valid, di write dengan warna default
+                        writer.write(letter);
                     }
                     writer.newLine();
                 }
@@ -102,7 +128,7 @@ public class IOHandler {
     }
 
     // Output hasil ke dalam terminal
-    public static void writeOutputTerminal(GameConfig gameConfig, int runTime, int numCases) {
+    public static void writeOutputTerminal(GameConfig gameConfig, long runTime, int numCases) {
         char[][] board = gameConfig.getBoard();
         boolean statusSolved = gameConfig.getStatus();
 
@@ -119,14 +145,55 @@ public class IOHandler {
                 System.out.println();
             }
         } else {
-            System.out.println("Tidak ada solusi yang memenuhi.");
+            System.out.println("\033[0mTidak ada solusi yang memenuhi.");
         }
 
-        System.out.println("Waktu pencarian: " + runTime + " ms");
+        System.out.println();
+
+        System.out.println("\033[0mWaktu pencarian: " + runTime + " ms"); // Reset warna
+
+        System.out.println();
 
         System.out.println("Banyak kasus yang ditinjau: " + numCases + " kasus");
+
+        System.out.println();
     }
 
-    // Fungsi untuk mendapatkan validasi untuk menyimpan output ke dalam file
-    
+    // Method menyimpan sebagai gambar
+    public static void outputAsImage(char[][] board, int squareSize, String fileName) {
+        int imageHeight = board.length * squareSize;
+        int imageWidth = board[0].length * squareSize;
+
+        BufferedImage image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D graphics = image.createGraphics();
+
+        graphics.setColor(Color.WHITE);
+        graphics.fillRect(0, 0, imageWidth, imageHeight);
+
+        // Isi dengan kotak-kotak piece
+        for (int idxRow = 0; idxRow < board.length; idxRow++) {
+            for (int idxCol = 0; idxCol < board[0].length; idxCol++) {
+                char letter = board[idxRow][idxCol];
+                Color letterColor = Utils.imageColorMap.get(letter);
+
+                graphics.setColor(letterColor);
+
+                int x = idxCol * squareSize;
+                int y = idxRow * squareSize;
+                graphics.fillRect(x, y, squareSize, squareSize);
+            }
+        }
+
+        graphics.dispose();
+
+        File outputImage = new File("../test/results/", fileName + ".png");
+
+        try {
+            ImageIO.write(image, "PNG", outputImage);
+            System.out.println("Gambar berhasil disimpan.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

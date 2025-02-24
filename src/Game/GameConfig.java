@@ -12,12 +12,12 @@ public class GameConfig {
     boolean isSolved;
 
     // Konstruktor konfigurasi papan
-    public GameConfig(int N, int M, int P, List<Piece> piecesList, String S) {
+    public GameConfig(int N, int M, int P, String S) {
         this.boardHeight = N;
         this.boardWidth = M;
         this.numPieces = P;
         this.puzzleType = S;
-        this.pieces = piecesList;
+        this.pieces = new ArrayList<>();
         this.board = new char[N][M];
         this.isSolved = false;
 
@@ -76,5 +76,13 @@ public class GameConfig {
     }
 
     // Method untuk menyimpan nilai atribut baru
-    
+    public void setPiecesList(List<Piece> piecesList) {
+        this.pieces = piecesList;
+    }
+    public void setBoard(char[][] board) {
+        this.board = board;
+    }
+    public void setStatus(boolean status) {
+        this.isSolved = status;
+    }
 }
