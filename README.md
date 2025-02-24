@@ -25,6 +25,11 @@ Setelah mengompilasi, silakan menjalankan perintah di bawah ini untuk menjalanka
 cd ../bin
 java Main
 ```
+**Penting**<br>
+Jika Anda ingin melakukan uji coba, pastikan bahwa file yang ingin Anda gunakan berada dalam folder `test`. Hasil penyimpanan file berada di `test/results`.
+
+## Berkontribusi
+Silakan fork repositori ini jika Anda ingin menambahkan atau melakukan perubahan apapun. 
 
 ## Author
-Aria Judhistira (13523112)
+Aria Judhistira / K2 / 13523112
