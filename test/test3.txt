@@ -1,10 +1,6 @@
-3 3 4
+3 3 2
 DEFAULT
-A
-AA
-B
-BB
-C
-CC
-D
-DD
+ZZZ
+Z Z
+ZZZ
+P

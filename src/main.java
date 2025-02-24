@@ -36,14 +36,14 @@ public class Main {
             // System.out.println("Membaca file input...");
             IOHandler.readInput(filePath, gameConfig);
 
+            // Utils.printPieces(gameConfig.getPieces()); // Debug
+
             boolean isFileInputValid = gameConfig.isInputValid();
             if (!isFileInputValid) {
                 System.out.println("Terdapat kesalahan dalam file input Anda. Silakan coba lagi.");
                 continue;
             }
             
-            // Utils.printPieces(gameConfig.getPieces());
-
             char[][] boardPuzzle = gameConfig.getBoard();
             List<Piece> pieces = gameConfig.getPieces();
             int[] numCases = {0};
@@ -68,22 +68,22 @@ public class Main {
 
             while (!validChoice) {
                 if (choice.equals("y") || choice.equals("Y")) {
-    
                     String fileName = IOHandler.getFileName();
                     IOHandler.writeOutputFile(fileName, gameConfig, runTime, numCases[0]);
-    
-                    boolean validInput = false;
-                    System.out.print("Apakah ingin menyimpan solusi dalam bentuk gambar juga? (y/n): ");
-                    while (!validInput) {
-                        String imageChoice = scanner.nextLine();
-                        if (imageChoice.equals("y") || imageChoice.equals("Y")) {
-                            IOHandler.outputAsImage(boardPuzzle, 100, fileName);
-                            validInput = true;
-                        } else if (imageChoice.equals("n") || imageChoice.equals("N")) {
-                            validInput = true;
-                        } else {
-                            System.out.println("Masukkan tidak valid. Silakan coba lagi.");
-                            System.out.print("Apakah ingin menyimpan solusi dalam bentuk gambar juga? (y/n): ");
+                    if (isSolved) {
+                        boolean validInput = false;
+                        System.out.print("Apakah ingin menyimpan solusi dalam bentuk gambar juga? (y/n): ");
+                        while (!validInput) {
+                            String imageChoice = scanner.nextLine();
+                            if (imageChoice.equals("y") || imageChoice.equals("Y")) {
+                                IOHandler.outputAsImage(boardPuzzle, 100, fileName);
+                                validInput = true;
+                            } else if (imageChoice.equals("n") || imageChoice.equals("N")) {
+                                validInput = true;
+                            } else {
+                                System.out.println("Masukkan tidak valid. Silakan coba lagi.");
+                                System.out.print("Apakah ingin menyimpan solusi dalam bentuk gambar juga? (y/n): ");
+                            }
                         }
                     }
                     validChoice = true;

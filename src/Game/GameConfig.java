@@ -31,7 +31,7 @@ public class GameConfig {
     }
 
     // Prosedur konstruktor
-    public void setGameCongig(int N, int M, int P, List<Piece> piecesList, String S) {
+    public void setGameConfig(int N, int M, int P, List<Piece> piecesList, String S) {
         this.boardHeight = N;
         this.boardWidth = M;
         this.numPieces = P;

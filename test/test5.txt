@@ -1,7 +1,12 @@
-3 3 3
+3 8 5
 DEFAULT
-XX
+V
+VV
+VVVV
+WWW
+W
 X
-YYY
-ZZ
-Z
+XXX
+ XX
+YY
+ZZZZZ

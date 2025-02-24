@@ -76,43 +76,4 @@ public class Piece {
     public void setCells(List<int[]> cells) {
         this.cells = cells;
     }
-
-    // Method untuk mendapatkan koordinat maksimum dan minimum piece
-    public int getMaxX() {
-        int maxX = Integer.MIN_VALUE;
-        for (int[] coordinate : cells) {
-            maxX = Math.max(maxX, coordinate[0]);
-        }
-        return maxX;
-    }
-    public int getMinX() {
-        int minX = Integer.MAX_VALUE;
-        for (int[] coordinate : cells) {
-            minX = Math.min(minX, coordinate[0]);
-        }
-        return minX;
-    }
-    public int getMaxY() {
-        int maxY = Integer.MIN_VALUE;
-        for (int[] coordinate : cells) {
-            maxY = Math.max(maxY, coordinate[1]);
-        }
-        return maxY;
-    }
-    public int getMinY() {
-        int minY = Integer.MAX_VALUE;
-        for (int[] coordinate : cells) {
-            minY = Math.min(minY, coordinate[1]);
-        }
-        return minY;
-    }
-
-    // Method untuk menambahkan koordinat piece sebesar offset tertentu
-    public void addOffset(int rowOffset, int colOffset) {
-        List<int[]> newCells = new ArrayList<>();
-        for (int[] coordinate : cells) {
-            newCells.add(new int[]{coordinate[0] + rowOffset, coordinate[1] + colOffset});
-        }
-        this.cells = newCells;
-    }
 }

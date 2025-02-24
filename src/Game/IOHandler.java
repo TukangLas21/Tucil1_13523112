@@ -19,7 +19,7 @@ public class IOHandler {
 
         File filePath = new File("../test/" + fileName); 
 
-        while (!filePath.exists()) {
+        while (!filePath.exists() || fileName.equals("")) {
             System.out.println("File tidak ditemukan. Silakan coba lagi.");
             System.out.print("Masukkan nama file input: ");
             fileName = scanner.nextLine();
@@ -63,7 +63,7 @@ public class IOHandler {
                 while (tempChar == pieceChar) {
                     String[] pieceInfo = line.split("");
                     for (int idxCol = 0; idxCol < pieceInfo.length; idxCol++) {
-                        if (pieceInfo[idxCol].equals("")) continue; // Skip (do nothing)
+                        if (pieceInfo[idxCol].equals("") || pieceInfo[idxCol].equals(" ")) continue; // Skip (do nothing)
                         else {
                             int[] pieceCell = new int[]{idxCol, idxRow};
                             pieceCells.add(pieceCell);
@@ -79,7 +79,7 @@ public class IOHandler {
                 if (line == null) break;
             }
             // Konstruksi objek konfigurasi papan
-            gameConfig.setGameCongig(N, M, P, pieces, S);
+            gameConfig.setGameConfig(N, M, P, pieces, S);
             reader.close();
 
         } catch (IOException e) {

@@ -1,0 +1,7 @@
+ABBCCC
+ADBCGC
+ADECCC
+AAEEFF
+
+Waktu pencarian: 17 ms
+Banyak kasus yang ditinjau: 234708 kasus
