@@ -4,12 +4,10 @@ import java.util.*;
 public class Piece {
     List<int[]> cells;
     char pieceName;
-    int rotationTimes;
 
     public Piece(List<int[]> cells, char name) {
         this.cells = cells;
         this.pieceName = name;
-        this.rotationTimes = 0;
     }
 
     // Method untuk merotasikan piece 90 derajat clockwise
@@ -72,9 +70,6 @@ public class Piece {
     }
     public char getPieceName() {
         return this.pieceName;
-    }
-    public int getRotationTimes() {
-        return this.rotationTimes;
     }
 
     // Method untuk set atribut piece

@@ -1,8 +1,0 @@
-AAEEG
-ABEEG
-BBEFG
-CCDFF
-CDDFF
-
-Waktu pencarian: 3 ms
-Banyak kasus yang ditinjau: 5690 kasus

@@ -29,11 +29,10 @@ public class Utils {
         return combinations;
     }
 
-    // Method untuk mengecek apakah piece dapat diletakan 
-    public static boolean isPosValid(char[][] board, List<int[]> pieceCells, int idxRow, int idxCol) {
+    public static boolean isPosValid(char[][] board, List<int[]> pieceCells, int idxCol, int idxRow) {
         for (int[] coordinate : pieceCells) {
-            int row = idxRow + coordinate[0];
-            int col = idxCol + coordinate[1];
+            int row = idxRow + coordinate[1];
+            int col = idxCol + coordinate[0];
             if (row < 0 || row >= board.length || col < 0 || col >= board[0].length || board[row][col] != '.') {
                 return false;
             }
@@ -41,20 +40,18 @@ public class Utils {
         return true;
     }
 
-    // Method untuk menempatkan piece pada posisi (idxCol, idxRow)
-    public static void placePiece(char[][] board, List<int[]> pieceCells, int idxRow, int idxCol, char pieceName) {
+    public static void placePiece(char[][] board, List<int[]> pieceCells, int idxCol, int idxRow, char pieceName) {
         for (int[] coordinate : pieceCells) {
-            int row = idxRow + coordinate[0];
-            int col = idxCol + coordinate[1];
+            int row = idxRow + coordinate[1];
+            int col = idxCol + coordinate[0];
             board[row][col] = pieceName;
         }
     }
 
-    // Method untuk menghapuskan piece dari posisi (idxCol, idxRow)
-    public static void removePiece(char[][] board, List<int[]> pieceCells, int idxRow, int idxCol) {
+    public static void removePiece(char[][] board, List<int[]> pieceCells, int idxCol, int idxRow) {
         for (int[] coordinate : pieceCells) {
-            int row = idxRow + coordinate[0];
-            int col = idxCol + coordinate[1];
+            int row = idxRow + coordinate[1];
+            int col = idxCol + coordinate[0];
             board[row][col] = '.';
         }
     }
@@ -106,21 +103,22 @@ public class Utils {
         imageColorMap.put('K', new Color(0, 128, 128));
         imageColorMap.put('L', new Color(255, 102, 204));
         imageColorMap.put('M', new Color(255, 51, 153));
-        imageColorMap.put('N', new Color(196, 0, 0));
-        imageColorMap.put('O', new Color(202, 0, 0));
-        imageColorMap.put('P', new Color(214, 0, 0));
-        imageColorMap.put('Q', new Color(226, 0, 0));
-        imageColorMap.put('R', new Color(154, 0, 0));
-        imageColorMap.put('S', new Color(82, 0, 0));
-        imageColorMap.put('T', new Color(50, 0, 0));
-        imageColorMap.put('U', new Color(39, 0, 0));
-        imageColorMap.put('V', new Color(27, 0, 0));
-        imageColorMap.put('W', new Color(21, 0, 0));
-        imageColorMap.put('X', new Color(57, 0, 0));
-        imageColorMap.put('Y', new Color(129, 0, 0));
-        imageColorMap.put('Z', new Color(201, 0, 0));
+        imageColorMap.put('N', new Color(204, 0, 0));  
+        imageColorMap.put('O', new Color(204, 51, 0));  
+        imageColorMap.put('P', new Color(204, 153, 0));
+        imageColorMap.put('Q', new Color(204, 204, 0));
+        imageColorMap.put('R', new Color(0, 204, 51)); 
+        imageColorMap.put('S', new Color(51, 204, 153));
+        imageColorMap.put('T', new Color(0, 204, 0));
+        imageColorMap.put('U', new Color(0, 153, 153));
+        imageColorMap.put('V', new Color(0, 0, 204));
+        imageColorMap.put('W', new Color(0, 0, 102));
+        imageColorMap.put('X', new Color(0, 102, 102));
+        imageColorMap.put('Y', new Color(204, 51, 102));
+        imageColorMap.put('Z', new Color(204, 25, 76));
     }
 
+    // Method untuk mengecek apakah papan sudah penuh atau belum
     public static boolean isBoardFull(char[][] board) {
         for (int idxRow = 0; idxRow < board.length; idxRow++) {
             for (int idxCol = 0; idxCol < board[0].length; idxCol++) {
@@ -141,6 +139,24 @@ public class Utils {
         }
     }
 
-    
+    // Method untuk mendapatkan semua jumlah potong piece
+    public static int getTotalPieceCoords(List<Piece> pieces) {
+        int totalCoords = 0;
+        for (Piece piece : pieces) {
+            totalCoords += piece.getCells().size();
+        }
+        return totalCoords;
+    }
+
+    // Method untuk mendapatkan semua posisi valid pada papan
+    public static int getTotalPos(char[][] board) {
+        int totalPos = 0;
+        for (int idxRow = 0; idxRow < board.length; idxRow++) {
+            for (int idxCol = 0; idxCol < board[0].length; idxCol++) {
+                if (board[idxRow][idxCol] == '.') totalPos++;
+            }
+        }
+        return totalPos;
+    }
     
 }

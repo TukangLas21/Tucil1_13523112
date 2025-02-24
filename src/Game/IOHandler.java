@@ -19,27 +19,17 @@ public class IOHandler {
 
         File filePath = new File("../test/" + fileName); 
 
-        if (!filePath.exists()) { // Validasi file
-            System.out.println("File tidak ditemukan.");
-            return null;
+        while (!filePath.exists()) {
+            System.out.println("File tidak ditemukan. Silakan coba lagi.");
+            System.out.print("Masukkan nama file input: ");
+            fileName = scanner.nextLine();
+            filePath = new File("../test/" + fileName);
         }
 
         // Debug input
         // System.out.println("Sukses!");
 
         return filePath;
-    }
-
-    // Baca dan simpan output path file
-    public static File outputFile() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.print("Masukkan nama file output: "); // Input cukup nama saja (tidak perlu path)
-            String fileName = scanner.nextLine(); 
-
-            File filePath = new File("../test/" + fileName); 
-
-            return filePath;
-        }
     }
 
     // Baca input file
@@ -122,6 +112,8 @@ public class IOHandler {
             writer.newLine();
 
             writer.write("Banyak kasus yang ditinjau: " + numCases + " kasus");
+
+            System.out.println("Solusi berhasil disimpan.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -194,6 +186,24 @@ public class IOHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    // Method untuk mendapatkan nama file output sekaligus memvalidasikan input pengguna
+    public static String getFileName() {
+
+        System.out.print("Masukkan nama file (tanpa ekstensi): ");
+        String fileName = scanner.nextLine();
+        File filePath = new File("../test/results/" + fileName + ".txt");
+
+        // Cek apakah sudah ada file dengan nama yang sama
+        while (filePath.exists() || fileName.equals("")) {
+            System.out.println("File sudah ada atau masukan tidak valid. Silakan coba lagi.");
+            System.out.print("Masukkan nama file (tanpa ekstensi): ");
+            fileName = scanner.nextLine();
+            filePath = new File("../test/results/" + fileName + ".txt");
+        }
+        
+        return fileName;
     }
 
 }

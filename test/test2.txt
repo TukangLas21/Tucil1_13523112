@@ -1,22 +1,21 @@
-4 5 20
+6 6 11
 DEFAULT
 A
+AA
 B
+BB
 C
+CC
 D
+DD
 E
+EE
 F
+FF
 G
+GG
 H
-I
-J
-K
-L
-M
-N
-O
-P
-Q
-R
-S
-T
+HH
+IIIIII
+JJ
+KKKK

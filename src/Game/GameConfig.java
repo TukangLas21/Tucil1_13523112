@@ -1,4 +1,5 @@
 package Game;
+import Utils.Utils;
 import java.util.*;
 
 public class GameConfig {
@@ -85,4 +86,24 @@ public class GameConfig {
     public void setStatus(boolean status) {
         this.isSolved = status;
     }
+
+    // Fungsi untuk memvalidasi input
+    public boolean isInputValid() {
+        int N = this.getBoardHeight();
+        int M = this.getBoardWidth();
+        String caseType = this.getPuzzleType();
+        List<Piece> pieces = this.getPieces();
+        char[][] board = this.getBoard();
+
+        // Cek apakah ukuran papan valid
+        if (N < 1 || M < 1) return false;
+
+        // Cek apakah jumlah pieces dengan ukuran papan valid
+        if (Utils.getTotalPos(board) != Utils.getTotalPieceCoords(pieces)) return false;
+
+        // Validasi tipe konfigurasi
+        if (!caseType.equals("DEFAULT")) return false;
+
+        return true;
+    } 
 }
