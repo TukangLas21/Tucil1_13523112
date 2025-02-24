@@ -1,0 +1,12 @@
+3 8 5
+DEFAULT
+V
+VV
+VVVV
+WWW
+W
+X
+XXX
+ XX
+YY
+ZZZZZ

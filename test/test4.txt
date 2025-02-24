@@ -1,0 +1,23 @@
+6 7 10
+DEFAULT
+KKK
+KK
+LLL
+  L
+MMM
+M
+MMM
+OO
+OO
+P
+P
+P
+QQQQQQ
+R
+RRR
+  R
+SS
+S
+SS
+T
+UU
